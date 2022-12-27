@@ -3,7 +3,7 @@ from lark.indenter import Indenter
 
 def main():
 
-    ewmGrammarFile = open("IndentedGrammar.lark", "r")
+    ewmGrammarFile = open("EwmGrammar.lark", "r")
     ewmGrammar = ewmGrammarFile.read()
 
     ewmParser = Lark(ewmGrammar, start='start', propagate_positions=True, postlex=TreeIndenter())
