@@ -1,19 +1,20 @@
 title:"login"
-lang:"pt-BR"
+lang:"
 classe1 : 
-    color "black" background "bisque"
+    color "black" 
+    background "bisque"
 classe2 : 
     color "black"
-classe3 : 
+classe3 :
     align "center"
 body : 
-    section (classe1)
+    section (classe1):
         img "logo.png" "logo"
         form post "cadastrar/usar"
-            section (classe3)
-                input text "Login" 
-                input password "Senha"
-                button submit "Fazer Login"
-            section 
-                text (classe2) "Ainda não tem cadastro?" 
-                link "cadastrar.html" "Cadastre-se"
+    section (classe3):
+        input txt "Login" 
+        input password "Senha"
+        button submit "Fazer Login"
+        section:
+            text (classe2) "Ainda não tem cadastro?" 
+            link "cadastrar.html" "Cadastre-se"

@@ -1,0 +1,67 @@
+PROPERTY.2 : "color" | "height" | "width" | "border" | "background" | "align" 
+
+TYPE.2 : "txt" | "password" | "submit"
+
+TEXT_TAG.2: "text"
+
+CONTAINER_TAG.2: "section"
+
+COMPONENT_TAG.2 : "input" | "button" | "link" | "img"
+
+
+STRING : ESCAPED_STRING
+
+ID.1 :  /[a-zA-Z][a-zA-Z0-9]*/
+
+TITLE.2 : "title" 
+
+LANGUAGE.2 : "lang" 
+
+BODY.2 : "body" 
+
+FORM.2 : "form" 
+
+GET.2 : "get"
+
+POST.2 : "post" 
+
+_NL: /(\r?\n[\t ]*)+/
+
+start : _NL* structure
+
+structure : header+ page
+
+header : (definition argument _NL) | (style_definition)
+
+page : BODY ":" _NL _INDENT command+ _DEDENT
+
+definition : (LANGUAGE ":") | (TITLE ":")
+
+style_definition : ID ":" _NL _INDENT (style _NL)+  _DEDENT
+
+container : container_command _NL _INDENT command+ _DEDENT
+
+command : text_command | container | form_command | component_command
+
+text_command : TEXT_TAG ("(" (style+ | ID) ")")? STRING _NL?
+
+container_command : CONTAINER_TAG ("(" (style+ | ID) ")")? ":"
+
+form_command : FORM method STRING _NL?
+
+component_command : COMPONENT_TAG ("(" (style+ | argument) ")")? specification _NL?
+
+method : GET | POST
+
+specification : STRING+ | (TYPE argument)
+
+style : PROPERTY argument
+
+argument : STRING | ID
+
+%import common.ESCAPED_STRING
+%import common.WS_INLINE
+
+%declare _INDENT _DEDENT
+
+%ignore WS_INLINE

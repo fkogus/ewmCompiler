@@ -1,88 +1,40 @@
-GRAMMAR = '''
-    @@grammar :: EWM
-
-    @@keyword :: color  height  width border background align
-    @@keyword :: section text input button link img
-    @@keyword :: text password submit title lang body form get post
-
-    @@parseinfo :: False
-
-    structure = {header}+ page $;
-
-    header = definition argument | {styleDefinition}+;
-
-    page = BODY ':' {command}+ ;
-
-    definition = (LANGUAGE ':') | (TITLE ':') ;
-
-    styleDefinition = argument ':' {style}+ ;
-
-    command = styleCommand | actionCommand | containerCommand ;
-
-    containerCommand = tag:TAG spec:specification ;
-
-    actionCommand = FORM method:method arg:argument ;
-
-    method = GET | POST ;
-    
-    styleCommand = tag:TAG '(' ({style}+ | arg:argument) ')' spec:specification ;
-
-    specification = arg:{argument}+ | (type:TYPE arg:argument) | {} ;
- 
-    style = prop:PROPERTY arg:argument ;
-
-    argument = STRING | ID ;
-
-    PROPERTY = 'color' | 'height' | 'width' | 'border' | 'background' | 'align' ;
-
-    TAG = 'section' | 'text' | 'input' | 'button' | 'link' | 'img' ;
-
-    TYPE = 'text' | 'password' | 'submit' ;
-
-    STRING = /\"[^\"]*\"/ ;
-
-    @name
-    ID =  ?"[a-zA-Z][a-zA-Z0-9]*" ;
-
-    TITLE = 'title' ;
-
-    LANGUAGE = 'lang' ;
-
-    BODY = 'body' ;
-
-    FORM = 'form' ;
-
-    GET = 'get';
-
-    POST = 'post' ;
-
-
-
-'''
-
+from lark import *
+from lark.indenter import Indenter
 
 def main():
-    import pprint
-    import json
-    from tatsu import parse
-    from tatsu.util import asjson
-    from tatsu.tokenizing import Tokenizer
 
-    ewm_file = open('example.ewm', "r")
+    ewmGrammarFile = open("IndentedGrammar.lark", "r")
+    ewmGrammar = ewmGrammarFile.read()
 
-    ex = ewm_file.read()
+    ewmParser = Lark(ewmGrammar, start='start', propagate_positions=True, postlex=TreeIndenter())
 
-    ast = parse(GRAMMAR, ex, start='structure')
-    print('PPRINT')
-    pprint.pprint(ast, indent=2, width=20)
-    print()
+    exFile = open("example.ewm", "r")
+    ex = exFile.read()
 
-    ewm_file.close()
+    tree = ewmParser.parse(ex)
 
-    print('JSON')
-    print(json.dumps(asjson(ast), indent=2))
-    print()
+    print(tree.pretty())
 
 
-if __name__ == '__main__':
+ 
+# class MyTransformer(Transformer):
+
+#     def __init__(self, visit_tokens: bool = True) -> None:
+#         self.vars = {}
+#         super().__init__(visit_tokens)
+
+#     def style_definition(self, a):
+#         print("\n\n\n", type(a), "\n\n\n")
+        
+#         return a
+
+class TreeIndenter(Indenter):
+    NL_type = '_NL'
+    OPEN_PAREN_types = []
+    CLOSE_PAREN_types = []
+    INDENT_type = '_INDENT'
+    DEDENT_type = '_DEDENT'
+    tab_len = 4
+
+if __name__ == "__main__":
     main()
