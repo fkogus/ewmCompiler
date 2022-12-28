@@ -8,6 +8,7 @@ A linguagem Easy Web Page Maker (EWM) foi projetada para ter como entrada um arq
 ### Gramática
 
 A gramática da linguagem pode ser vista no arquivo EwmGrammar.lark
+
 Uma entrada válida no formato .ewm encontra-se abaixo
 
 ```
