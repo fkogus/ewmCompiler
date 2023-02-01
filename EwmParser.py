@@ -1,5 +1,6 @@
 from lark import *
 from lark.indenter import Indenter
+from transf import EwmTransformer
 
 def main():
 
@@ -13,20 +14,13 @@ def main():
 
     tree = ewmParser.parse(ex)
 
-    print(tree.pretty())
+    carlos = EwmTransformer().transform(tree)
+
+    print(carlos)
+
+    # print(tree.pretty())
 
 
- 
-# class MyTransformer(Transformer):
-
-#     def __init__(self, visit_tokens: bool = True) -> None:
-#         self.vars = {}
-#         super().__init__(visit_tokens)
-
-#     def style_definition(self, a):
-#         print("\n\n\n", type(a), "\n\n\n")
-        
-#         return a
 
 class TreeIndenter(Indenter):
     NL_type = '_NL'
