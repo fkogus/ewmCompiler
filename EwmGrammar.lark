@@ -49,7 +49,7 @@ container_command : CONTAINER_TAG ("(" (style+ | ID) ")")? ":"
 
 form_command : FORM method STRING _NL?
 
-component_command : COMPONENT_TAG ("(" (style+ | argument) ")")? specification _NL?
+component_command : COMPONENT_TAG ("(" (style+ | ID) ")")? specification _NL?
 
 method : GET | POST
 

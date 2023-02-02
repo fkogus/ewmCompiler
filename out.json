@@ -1,0 +1,160 @@
+[
+    {
+        "header": [
+            {
+                "def": "title",
+                "arg": "login"
+            },
+            {
+                "def": "lang",
+                "arg": "pt-BR"
+            },
+            {
+                "style_def": [
+                    {
+                        "id": "classe1",
+                        "style": [
+                            {
+                                "property": "color",
+                                "argument": "black"
+                            },
+                            {
+                                "property": "background",
+                                "argument": "bisque"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "style_def": [
+                    {
+                        "id": "classe2",
+                        "style": [
+                            {
+                                "property": "color",
+                                "argument": "black"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "style_def": [
+                    {
+                        "id": "classe3",
+                        "style": [
+                            {
+                                "property": "align",
+                                "argument": "center"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "page": {
+            "body": "body",
+            "commands": [
+                [
+                    {
+                        "container": [
+                            {
+                                "type": "container",
+                                "command": "section",
+                                "class": "classe1"
+                            },
+                            [
+                                {
+                                    "type": "component",
+                                    "command": "img",
+                                    "spec": [
+                                        "logo.png",
+                                        "logo"
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    "type": "form",
+                                    "command": "form",
+                                    "method": "post",
+                                    "arg": "cadastrar/usar"
+                                }
+                            ]
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "container": [
+                            {
+                                "type": "container",
+                                "command": "section",
+                                "class": "classe3"
+                            },
+                            [
+                                {
+                                    "type": "component",
+                                    "command": "input",
+                                    "spec": {
+                                        "type": "txt",
+                                        "arg": "Login"
+                                    }
+                                }
+                            ],
+                            [
+                                {
+                                    "type": "component",
+                                    "command": "input",
+                                    "spec": {
+                                        "type": "password",
+                                        "arg": "Senha"
+                                    }
+                                }
+                            ],
+                            [
+                                {
+                                    "type": "component",
+                                    "command": "button",
+                                    "spec": {
+                                        "type": "submit",
+                                        "arg": "Fazer Login"
+                                    }
+                                }
+                            ],
+                            [
+                                {
+                                    "container": [
+                                        {
+                                            "type": "container",
+                                            "command": "section"
+                                        },
+                                        [
+                                            {
+                                                "type": "text",
+                                                "command": "text",
+                                                "class": "classe2",
+                                                "arg": "Ainda nÃ£o tem cadastro?"
+                                            }
+                                        ],
+                                        [
+                                            {
+                                                "type": "component",
+                                                "command": "link",
+                                                "spec": [
+                                                    "cadastrar.html",
+                                                    "Cadastre-se"
+                                                ]
+                                            }
+                                        ]
+                                    ]
+                                }
+                            ]
+                        ]
+                    }
+                ]
+            ]
+        }
+    }
+]
