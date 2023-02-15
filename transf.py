@@ -76,7 +76,7 @@ class EwmTransformer(Transformer):
             cmd['arg'] = items[2]
         elif items[1].type == 'ID':
             cmd['class'] = items[1].value
-            cmd['arg'] = items[2].value
+            cmd['arg'] = items[2].value.replace("\"", "")
         else:
             cmd['arg'] = items[1]
 
@@ -94,7 +94,7 @@ class EwmTransformer(Transformer):
         return cmd
     
     def form_command(self, items):
-        cmd = {'type': 'form', 'command': items[0].value, 'method': items[1], 'arg': items[2].value}
+        cmd = {'type': 'form', 'command': items[0].value, 'method': items[1], 'arg': items[2].value.replace("\"", "")}
 
         return cmd
 
@@ -122,11 +122,14 @@ class EwmTransformer(Transformer):
         else:
             strings = []
             for i in range(len(items)):
-                strings.append(items[i].value)
+                strings.append(items[i].value.replace("\"", ""))
             return strings
 
     def argument(self, items):
-        return items[0].value
+
+        argument = items[0].value.replace("\"", "")
+
+        return argument
 
     def method(self, items):
         return items[0].value

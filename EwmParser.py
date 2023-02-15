@@ -1,6 +1,7 @@
 from lark import *
 from lark.indenter import Indenter
 from transf import EwmTransformer
+import json
 
 def main():
 
@@ -16,7 +17,10 @@ def main():
 
     carlos = EwmTransformer().transform(tree)
 
-    print(carlos)
+    # print(carlos)
+
+    with open("carlos.json", "w") as outfile:
+        json.dump(carlos, outfile, indent=2)
 
     # print(tree.pretty())
 
