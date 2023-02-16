@@ -1,6 +1,6 @@
 PROPERTY.2 : "color" | "height" | "width" | "border" | "background" | "align" 
 
-TYPE.2 : "txt" | "password" | "submit"
+TYPE.2 : "txt" | "password" | "submit" | "jooj"
 
 TEXT_TAG.2: "text"
 
@@ -8,6 +8,7 @@ CONTAINER_TAG.2: "section"
 
 COMPONENT_TAG.2 : "input" | "button" | "link" | "img"
 
+DOWNLOAD : "download"
 
 STRING : ESCAPED_STRING
 
@@ -53,7 +54,7 @@ component_command : COMPONENT_TAG ("(" (style+ | ID) ")")? specification _NL?
 
 method : GET | POST
 
-specification : STRING+ | (TYPE argument)
+specification : STRING+ (DOWNLOAD)?| (TYPE argument)
 
 style : PROPERTY argument
 

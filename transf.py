@@ -1,6 +1,18 @@
 from lark import Transformer, Tree
+import sys
+sys.path.append('errors')
+
+from WrongAttributeError import WrongAttributeError
+
+# Use the MyClass class here...
+
 
 class EwmTransformer(Transformer):
+
+    semantic_dict = {'button': ['button', 'submit', 'reset'],
+    'input': ['button', 'checkbox', 'color', 'date', 'datetime-local', 'email', 'file', 'hidden', 'image', 'month', 'number', 'radio', 'range', 'reset', 'submit', 'tel', 'txt', 'time', 'url', 'week', 'password'],
+    }
+
     def start(self, items):
         return items
     
@@ -102,14 +114,24 @@ class EwmTransformer(Transformer):
     def component_command(self, items):
         cmd = {'type': 'component', 'command': items[0].value}
 
+        pos_spec = 1
+
         if type(items[1]) == dict and len(items) > 2:
             cmd['style'] = items[1]
-            cmd['spec'] = items[2]
+            cmd['spec'] = items[2][0]
+            pos_spec = 2
         elif type(items[1]) != list and len(items) > 2:
             cmd['class'] = items[1].value
-            cmd['spec'] = items[2]
+            cmd['spec'] = items[2][0]
+            pos_spec = 2
         else:
-            cmd['spec'] = items[1]
+            cmd['spec'] = items[1][0]
+
+        if 'spec' in cmd:
+            if 'type' in cmd['spec']:
+                if cmd['spec']['type'] not in self.semantic_dict[cmd['command']]:
+                    print(cmd)
+                    raise WrongAttributeError(cmd['spec']['type'], cmd['command'], items[pos_spec][1], items[pos_spec][2])
 
         return cmd
 
@@ -118,12 +140,12 @@ class EwmTransformer(Transformer):
         if items[0].type == "TYPE":
             spec['type'] = items[0].value
             spec['arg'] = items[1]
-            return spec
+            return (spec, items[0].line, items[0].column)
         else:
             strings = []
             for i in range(len(items)):
                 strings.append(items[i].value.replace("\"", ""))
-            return strings
+            return (strings, )
 
     def argument(self, items):
 

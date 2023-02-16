@@ -25,7 +25,6 @@ def main():
     # print(tree.pretty())
 
 
-
 class TreeIndenter(Indenter):
     NL_type = '_NL'
     OPEN_PAREN_types = []
