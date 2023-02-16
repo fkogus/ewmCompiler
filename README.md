@@ -50,90 +50,166 @@ python3 EwmParser.py
 ```
 
 ```
-start
-  structure
-    header
-      definition        title
-      argument  "login"
-    header
-      definition        lang
-      argument  "pt-BR"
-    header
-      style_definition
-        classe1
-        style
-          color
-          argument      "black"
-        style
-          background
-          argument      "bisque"
-    header
-      style_definition
-        classe2
-        style
-          color
-          argument      "black"
-    header
-      style_definition
-        classe3
-        style
-          align
-          argument      "center"
-    page
-      body
-      command
-        container
-          container_command
-            section
-            classe1
-          command
-            component_command
-              img
-              specification
-                "logo.png"
-                "logo"
-          command
-            form_command
-              form
-              method    post
-              "cadastrar/usar"
-      command
-        container
-          container_command
-            section
-            classe3
-          command
-            component_command
-              input
-              specification
-                txt
-                argument        "Login"
-          command
-            component_command
-              input
-              specification
-                password
-                argument        "Senha"
-          command
-            component_command
-              button
-              specification
-                submit
-                argument        "Fazer Login"
-          command
-            container
-              container_command section
-              command
-                text_command
-                  text
-                  classe2
-                  "Ainda não tem cadastro?"
-              command
-                component_command
-                  link
-                  specification
-                    "cadastrar.html"
-                    "Cadastre-se"
+[
+  {
+    "header": [
+      {
+        "def": "title",
+        "arg": "login"
+      },
+      {
+        "def": "lang",
+        "arg": "pt-BR"
+      },
+      {
+        "style_def": [
+          {
+            "id": "classe1",
+            "style": [
+              {
+                "property": "color",
+                "argument": "black"
+              },
+              {
+                "property": "background",
+                "argument": "bisque"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "style_def": [
+          {
+            "id": "classe2",
+            "style": [
+              {
+                "property": "color",
+                "argument": "black"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "style_def": [
+          {
+            "id": "classe3",
+            "style": [
+              {
+                "property": "align",
+                "argument": "center"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "page": {
+      "body": "body",
+      "commands": [
+        [
+          {
+            "container": [
+              {
+                "type": "container",
+                "command": "section",
+                "class": "classe1"
+              },
+              [
+                {
+                  "type": "component",
+                  "command": "img",
+                  "spec": [
+                    "logo.png",
+                    "logo"
+                  ]
+                }
+              ],
+              [
+                {
+                  "type": "form",
+                  "command": "form",
+                  "method": "post",
+                  "arg": "cadastrar/usar"
+                }
+              ]
+            ]
+          }
+        ],
+        [
+          {
+            "container": [
+              {
+                "type": "container",
+                "command": "section",
+                "class": "classe3"
+              },
+              [
+                {
+                  "type": "component",
+                  "command": "input",
+                  "spec": {
+                    "type": "txt",
+                    "arg": "Login"
+                  }
+                }
+              ],
+              [
+                {
+                  "type": "component",
+                  "command": "input",
+                  "spec": {
+                    "type": "password",
+                    "arg": "Senha"
+                  }
+                }
+              ],
+              [
+                {
+                  "type": "component",
+                  "command": "button",
+                  "spec": {
+                    "type": "submit",
+                    "arg": "Fazer Login"
+                  }
+                }
+              ],
+              [
+                {
+                  "container": [
+                    {
+                      "type": "container",
+                      "command": "section"
+                    },
+                    [
+                      {
+                        "type": "text",
+                        "command": "text",
+                        "class": "classe2",
+                        "arg": "Ainda n\u00c3\u00a3o tem cadastro?"
+                      }
+                    ],
+                    [
+                      {
+                        "type": "component",
+                        "command": "link",
+                        "spec": [
+                          "cadastrar.html",
+                          "Cadastre-se"
+                        ]
+                      }
+                    ]
+                  ]
+                }
+              ]
+            ]
+          }
+        ]
+      ]
+    }
+  }
+]
 ```
 
 #### Análise Semântica

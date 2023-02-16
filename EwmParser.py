@@ -15,14 +15,10 @@ def main():
 
     tree = ewmParser.parse(ex)
 
-    carlos = EwmTransformer().transform(tree)
+    saida = EwmTransformer().transform(tree)
 
-    # print(carlos)
-
-    with open("carlos.json", "w") as outfile:
-        json.dump(carlos, outfile, indent=2)
-
-    # print(tree.pretty())
+    with open("out.json", "w") as outfile:
+        json.dump(saida, outfile, indent=2)
 
 
 class TreeIndenter(Indenter):

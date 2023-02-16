@@ -1,12 +1,13 @@
 PROPERTY.2 : "color" | "height" | "width" | "border" | "background" | "align" 
 
-TYPE.2 : "txt" | "password" | "submit" | "jooj"
+TYPE.2 : "txt" | "password" | "submit"
 
 TEXT_TAG.2: "text"
 
 CONTAINER_TAG.2: "section"
 
 COMPONENT_TAG.2 : "input" | "button" | "link" | "img"
+
 
 DOWNLOAD : "download"
 
