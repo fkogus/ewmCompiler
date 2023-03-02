@@ -8,6 +8,8 @@ from WrongSpecError import WrongSpecError
 
 class EwmTransformer(Transformer):
 
+    errors = []
+
     semantic_dict = {'button': ['btn', 'submit', 'reset'],
     'input': ['btn', 'checkbox', 'colour', 'date', 'datetime-local', 'email', 'file', 'hidden', 'image', 'month', 'number', 'radio', 'range', 'reset', 'submit', 'tel', 'txt', 'time', 'url', 'week', 'password'],
     }
@@ -126,15 +128,21 @@ class EwmTransformer(Transformer):
         else:
             cmd['spec'] = items[1][0]
 
-        if 'spec' in cmd:
-            if 'type' in cmd['spec']:
+        try:
+            if 'spec' in cmd:
+                if 'type' in cmd['spec']:
 
-                if cmd['command'] == 'link':
-                    if type(cmd['spec']) == dict:
-                        raise WrongSpecError('link', items[pos_spec][1], items[pos_spec][2])
-                    
-                if cmd['spec']['type'] not in self.semantic_dict[cmd['command']]:
-                    raise WrongAttributeError(cmd['spec']['type'], cmd['command'], items[pos_spec][1], items[pos_spec][2])
+                    if cmd['command'] == 'link':
+                        if type(cmd['spec']) == dict:
+                            raise WrongSpecError('link', items[pos_spec][1], items[pos_spec][2])
+                        
+                    if cmd['spec']['type'] not in self.semantic_dict[cmd['command']]:
+                        raise WrongAttributeError(cmd['spec']['type'], cmd['command'], items[pos_spec][1], items[pos_spec][2])
+        except Exception as e:
+            self.errors.append(e)
+
+        for e in self.errors:
+            print(e)
 
         return cmd
 
