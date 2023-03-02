@@ -232,7 +232,7 @@ Foram também mapeados os possíveis erros semânticos da gramática, utilizamos
 Parameter  do not match with attribute {attr} in {line}:{column}
 ```
 
-Aqui por exemplo colocamos o parâmetro colour para a tag button, que não está mapeado para recebê-la, recebemos então o erro:
+Aqui por exemplo colocamos o parâmetro colour para a tag button, a tag não está mapeada para recebê-lo, portanto recebemos o erro:
 
 ```
 WrongAttributeError: Parameter colour do not match with attribute button in 17:16
