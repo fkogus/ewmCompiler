@@ -3,14 +3,13 @@ import sys
 sys.path.append('errors')
 
 from WrongAttributeError import WrongAttributeError
-
-# Use the MyClass class here...
+from WrongSpecError import WrongSpecError
 
 
 class EwmTransformer(Transformer):
 
-    semantic_dict = {'button': ['button', 'submit', 'reset'],
-    'input': ['button', 'checkbox', 'color', 'date', 'datetime-local', 'email', 'file', 'hidden', 'image', 'month', 'number', 'radio', 'range', 'reset', 'submit', 'tel', 'txt', 'time', 'url', 'week', 'password'],
+    semantic_dict = {'button': ['btn', 'submit', 'reset'],
+    'input': ['btn', 'checkbox', 'colour', 'date', 'datetime-local', 'email', 'file', 'hidden', 'image', 'month', 'number', 'radio', 'range', 'reset', 'submit', 'tel', 'txt', 'time', 'url', 'week', 'password'],
     }
 
     def start(self, items):
@@ -78,7 +77,7 @@ class EwmTransformer(Transformer):
         if type(items[0]) == Tree:
             return items[0].children
         else:
-            return items
+            return items[0]
     
     def text_command(self, items):
         cmd = {'type': 'text', 'command': items[0].value}
@@ -129,8 +128,12 @@ class EwmTransformer(Transformer):
 
         if 'spec' in cmd:
             if 'type' in cmd['spec']:
+
+                if cmd['command'] == 'link':
+                    if type(cmd['spec']) == dict:
+                        raise WrongSpecError('link', items[pos_spec][1], items[pos_spec][2])
+                    
                 if cmd['spec']['type'] not in self.semantic_dict[cmd['command']]:
-                    print(cmd)
                     raise WrongAttributeError(cmd['spec']['type'], cmd['command'], items[pos_spec][1], items[pos_spec][2])
 
         return cmd
@@ -161,4 +164,47 @@ class EwmTransformer(Transformer):
 
     def container(self, items):
         return {'container': items}
+    
+    def table_command(self, items):
+        
+        dictionary = {}
+
+        dictionary['type'] = 'table'
+
+        if len(items) == 4:
+            dictionary['class'] = items[1].value
+            dictionary['thead'] = items[2]
+            dictionary['tbody'] = items[3]
+
+        else:
+            dictionary['thead'] = items[1]
+            dictionary['tbody'] = items[2]
+
+        return dictionary
+    
+    def table_body(self, items):
+
+        items_list = []
+
+        for i in items[1:]:
+            items_list.append(i)
+
+        return {'component': 'tbody', 'items': items_list}
+    
+    def table_head(self, items):
+
+        values = items[1:]
+
+        values = [item.value for item in values]
+        values = [item.replace("\"", "") for item in values]
+
+        return {'component': 'thead', 'values': values}
+    
+    def table_item(self, items):
+        values = items
+
+        values = [item.value for item in values]
+        values = [item.replace("\"", "") for item in values]
+
+        return values
 
