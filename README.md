@@ -43,7 +43,7 @@ pip install lark
 ```
 #### Análise Léxica e Sintática
 
-Para gerar a AST você deve rodar o arquivo EwmParser.py com o comando abaixo e a saída será algo como o exemplo a seguir
+Para gerar a AST você deve rodar o arquivo EwmParser.py com o comando abaixo e um arquivo out.json será gerado contendo algo como o exemplo a seguir
 
 ```
 python3 EwmParser.py
@@ -213,6 +213,31 @@ python3 EwmParser.py
 ```
 
 #### Análise Semântica
+
+Para a análise semântica foram realizadas validações antes de concluir a geração da AST. As validações incluem o mapeamento de determinados tags e tokens como por exemplo: 
+
+```
+semantic_dict = {
+    'button': ['button', 'submit', 'reset'],
+    'input': ['button', 'checkbox', 'color', 'date', 'datetime-local', 'email', 'file', 'hidden', 'image', 'month', 'number', 'radio', 'range', 'reset', 'submit', 'tel', 'txt', 'time', 'url', 'week', 'password'],
+}
+```
+
+Aqui temos os mapeamentos possíveis que a tag button e a tag input aceitam respectivamente.
+
+Foram também mapeados os possíveis erros semânticos da gramática, utilizamos o WrongAttributeError do python, que é como qualquer exceção custom da linguagem, para mostrar os erros como o exemplo:
+
+
+```
+Parameter  do not match with attribute {attr} in {line}:{column}
+```
+
+Aqui por exemplo colocamos o parâmetro colour para a tag button, que não está mapeado para recebê-la, recebemos então o erro:
+
+```
+WrongAttributeError: Parameter colour do not match with attribute button in 17:16
+```
+
 
 #### Geração de Código
 
