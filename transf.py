@@ -107,7 +107,8 @@ class EwmTransformer(Transformer):
         return cmd
     
     def form_command(self, items):
-        cmd = {'type': 'form', 'command': items[0].value, 'method': items[1], 'arg': items[2].value.replace("\"", "")}
+
+        cmd = {'type': 'form', 'command': items[0].value, 'method': items[1], 'arg': items[2].value.replace("\"", ""), 'content': items[3:]}
 
         return cmd
 

@@ -1,5 +1,6 @@
 title:"login"
 lang:"pt-BR"
+script: "script.js"
 classe1 : 
     color "black" 
     background "bisque"
@@ -11,10 +12,10 @@ body :
     section (classe1):
         img "logo.png" "logo"
         form post "cadastrar/usar"
-    section (classe3):
-        input txt "Login" 
-        input password "Senha"
-        button submit "Fazer Login"
+            section (classe3):
+                input txt "Login" 
+                input password "Senha"
+                button submit "Fazer Login"
         section:
             text (classe2) "Ainda não tem cadastro?" 
             link "cadastrar.html" "Cadastre-se"

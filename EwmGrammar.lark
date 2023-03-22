@@ -16,13 +16,15 @@ COMPONENT_TAG.3 : "input" | "button" | "link" | "img"
 
 DOWNLOAD : "download"
 
-STRING : ESCAPED_STRING
+STRING : ESCAPED_STRING | /\"\"\"((.|\n)*)\"\"\"/
 
 ID.1 :  /[a-zA-Z][a-zA-Z0-9]*/
 
 TITLE.2 : "title" 
 
 LANGUAGE.2 : "lang" 
+
+SCRIPT.2 : "script"
 
 BODY.2 : "body"
 
@@ -42,7 +44,7 @@ header : (definition argument _NL) | (style_definition)
 
 page : BODY ":" _NL _INDENT command+ _DEDENT
 
-definition : (LANGUAGE ":") | (TITLE ":")
+definition : (LANGUAGE ":") | (TITLE ":") | (SCRIPT ":")
 
 style_definition : ID ":" _NL _INDENT (style _NL)+  _DEDENT
 
@@ -54,9 +56,9 @@ text_command : TEXT_TAG ("(" (ID) ")")? STRING _NL?
 
 container_command : CONTAINER_TAG ("(" (ID) ")")? ":"
 
-form_command : FORM method STRING _NL?
+form_command : FORM method STRING _NL _INDENT command+ _DEDENT
 
-component_command : COMPONENT_TAG ("(" (ID) ")")? specification _NL?
+component_command : COMPONENT_TAG ("(" (ID) ")")? specification _NL? 
 
 table_command : TABLE_TAG ("(" (ID) ")")? ":" _NL _INDENT table_head table_body _DEDENT
 
@@ -73,6 +75,7 @@ specification : STRING STRING (DOWNLOAD)?| (TYPE argument)
 style : PROPERTY argument
 
 argument : STRING | ID
+
 
 %import common.ESCAPED_STRING
 %import common.WS_INLINE

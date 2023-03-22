@@ -10,6 +10,10 @@
         "arg": "pt-BR"
       },
       {
+        "def": "script",
+        "arg": "script.js"
+      },
+      {
         "style_def": [
           {
             "id": "classe1",
@@ -75,40 +79,42 @@
               "type": "form",
               "command": "form",
               "method": "post",
-              "arg": "cadastrar/usar"
-            }
-          ]
-        },
-        {
-          "container": [
-            {
-              "type": "container",
-              "command": "section",
-              "class": "classe3"
-            },
-            {
-              "type": "component",
-              "command": "input",
-              "spec": {
-                "type": "txt",
-                "arg": "Login"
-              }
-            },
-            {
-              "type": "component",
-              "command": "input",
-              "spec": {
-                "type": "password",
-                "arg": "Senha"
-              }
-            },
-            {
-              "type": "component",
-              "command": "button",
-              "spec": {
-                "type": "submit",
-                "arg": "Fazer Login"
-              }
+              "arg": "cadastrar/usar",
+              "content": [
+                {
+                  "container": [
+                    {
+                      "type": "container",
+                      "command": "section",
+                      "class": "classe3"
+                    },
+                    {
+                      "type": "component",
+                      "command": "input",
+                      "spec": {
+                        "type": "txt",
+                        "arg": "Login"
+                      }
+                    },
+                    {
+                      "type": "component",
+                      "command": "input",
+                      "spec": {
+                        "type": "password",
+                        "arg": "Senha"
+                      }
+                    },
+                    {
+                      "type": "component",
+                      "command": "button",
+                      "spec": {
+                        "type": "submit",
+                        "arg": "Fazer Login"
+                      }
+                    }
+                  ]
+                }
+              ]
             },
             {
               "container": [
