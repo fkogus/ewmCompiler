@@ -14,7 +14,7 @@ CONTAINER_TAG.2: "section"
 
 COMPONENT_TAG.3 : "input" | "button" | "link" | "img"
 
-pure_style.2 : "$" ID
+pure_style.2 : "$" STRING
 
 DOWNLOAD : "download"
 

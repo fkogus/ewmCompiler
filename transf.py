@@ -222,5 +222,5 @@ class EwmTransformer(Transformer):
     
     def pure_style(self, items):
 
-        return "$" + items[0]
+        return "$" + items[0].replace('"', '')
 
