@@ -127,6 +127,7 @@ html_template = """
 <head>
   <meta charset="UTF-8">
   {header_code}
+  <style>body {{margin: 0;}}</style>
 </head>
 <body>
   {page_content}

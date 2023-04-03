@@ -10,7 +10,7 @@ def main():
 
     ewmParser = Lark(ewmGrammar, start='start', propagate_positions=True, postlex=TreeIndenter())
 
-    exFile = open("example.ewm", "r")
+    exFile = open("home.ewm", "r")
     ex = exFile.read()
 
     tree = ewmParser.parse(ex)

@@ -1,0 +1,95 @@
+title:"home"
+lang:"pt-BR"
+home :
+    background "#d7dfea"
+header :
+    display "flex"
+    flex-direction "row"
+    justify-content "space-between"
+    padding "20px 60px"
+nav :
+    display "flex"
+    flex-direction "row"
+    column-gap "30px"
+$ "a" :
+    color "black"
+    text-decoration "none"
+active :
+    text-decoration "underline"
+$ "img" :
+    max-width "100px"
+h3 :
+    font-size "30px"
+    font-weight "bold"
+main :
+    padding "20px 60px"
+features :
+    padding "20px 60px"
+cardgrid :
+    display "flex"
+    flex-direction "row"
+    flex-wrap "wrap"
+    justify-content "space-between"
+codebox :
+    background "black"
+    color "#efefef"
+    padding "20px"
+    border-radius "10px"
+    font-family "'Courier New'"
+card :
+    height "auto"
+    width "30%"
+    background "#e8f7fa"
+    border "solid 2px"
+    border-color "#e8f7fa"
+    border-radius "25px"
+    font-size "0.85rem"
+    text-align "start"
+    padding "10px"
+    margin-bottom "20px"
+cardtitle :
+    font-weight "bold"
+    margin-bottom "0.2rem"
+    text-decoration "underline"
+
+body :
+    section (home):
+        section (header):
+            img "logo.png" "logo"
+            section (nav):
+                section (item):
+                    link "https://cyan-lang.org/" "about"
+                section (item):
+                    link "https://compiler.cyan-lang.org" "compiler"
+                section (item):
+                    link "https://cyan-lang.org/docs" "docs"
+                section (item):
+                    link "https://cyan-lang.org/downloads/" "downloads"
+                section (item):
+                    link "https://cyan-lang.org/examples/" "examples"
+        section (main):
+            text (h3) "The Cyan Object-oriented Language"
+            text (p) "Cyan is a statically-typed and prototype-based language for the JVM. The language has several innovations mainly in its Metaobject Protocol that allows tailoring the language to the developer’s goals. It supports all the expected features of modern languages and much more."
+            text (p) "Below is the “Hello world” program. Soon there will be a short Cyan course."
+            section (codebox):
+                text (code) "package main"
+                text (code) "object Program"
+                text (code) "func run {"
+                text (code) "'Hello world' println"
+                text (code) "}"
+                text (code) "end"
+        section (features):
+            text (h3) "Features"
+            section (cardgrid):
+                section (card):
+                    text (cardtitle) "Simplicity is the main goal"
+                    text (small) "No bells and whistles, complex features are implemented using metaobjects, outside the language"
+                section (card):
+                    text (cardtitle) "Simplicity is the main goal"
+                    text (small) "No bells and whistles, complex features are implemented using metaobjects, outside the language"
+                section (card):
+                    text (cardtitle) "Simplicity is the main goal"
+                    text (small) "No bells and whistles, complex features are implemented using metaobjects, outside the language"
+                section (card):
+                    text (cardtitle) "Simplicity is the main goal"
+                    text (small) "No bells and whistles, complex features are implemented using metaobjects, outside the language"
