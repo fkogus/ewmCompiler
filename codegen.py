@@ -13,8 +13,13 @@ def generate_header(header_data):
                 header_html += f'<script src="{item["arg"]}" type="text/javascript"></script>\n'
         elif 'style_def' in item:
             for style_item in item['style_def']:
+                style_id = style_item["id"]
+                if style_id.startswith("$"):
+                    style_id = style_id[1:]
+                else:
+                    style_id = "." + style_id
                 style = ';'.join([f'{s["property"]}:{s["argument"]}' for s in style_item['style']])
-                header_html += f'<style>.{style_item["id"]}{{{style}}}</style>\n'
+                header_html += f'<style>{style_id}{{{style}}}</style>\n'
 
     return header_html
 

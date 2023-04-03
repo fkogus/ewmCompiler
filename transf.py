@@ -36,8 +36,11 @@ class EwmTransformer(Transformer):
     def style_definition(self, items):
 
         style_def = {}
-        style_def['id'] = items[0].value
 
+        if isinstance(items[0], str):
+            style_def['id'] = items[0]
+        else:
+            style_def['id'] = items[0].value
 
         styles = []
 
@@ -216,4 +219,8 @@ class EwmTransformer(Transformer):
         values = [item.replace("\"", "") for item in values]
 
         return values
+    
+    def pure_style(self, items):
+
+        return "$" + items[0]
 

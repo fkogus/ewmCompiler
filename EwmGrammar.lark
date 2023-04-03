@@ -14,6 +14,8 @@ CONTAINER_TAG.2: "section"
 
 COMPONENT_TAG.3 : "input" | "button" | "link" | "img"
 
+pure_style.2 : "$" ID
+
 DOWNLOAD : "download"
 
 STRING : ESCAPED_STRING | /\"\"\"((.|\n)*)\"\"\"/
@@ -46,7 +48,7 @@ page : BODY ":" _NL _INDENT command+ _DEDENT
 
 definition : (LANGUAGE ":") | (TITLE ":") | (SCRIPT ":")
 
-style_definition : ID ":" _NL _INDENT (style _NL)+  _DEDENT
+style_definition : (ID | pure_style) ":" _NL _INDENT (style _NL)+  _DEDENT
 
 container : container_command _NL _INDENT command+ _DEDENT
 
