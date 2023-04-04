@@ -12,26 +12,101 @@ A gramática da linguagem pode ser vista no arquivo EwmGrammar.lark
 Uma entrada válida no formato .ewm encontra-se abaixo
 
 ```
-title:"login"
+title:"home"
 lang:"pt-BR"
-classe1 : 
-    color "black" 
-    background "bisque"
-classe2 : 
+home :
+    background "#d7dfea"
+header :
+    display "flex"
+    flex-direction "row"
+    justify-content "space-between"
+    padding "20px 60px"
+nav :
+    display "flex"
+    flex-direction "row"
+    column-gap "30px"
+$ "a" :
     color "black"
-classe3 :
-    align "center"
-body : 
-    section (classe1):
-        img "logo.png" "logo"
-        form post "cadastrar/usar"
-    section (classe3):
-        input txt "Login" 
-        input password "Senha"
-        button submit "Fazer Login"
-        section:
-            text (classe2) "Ainda não tem cadastro?" 
-            link "cadastrar.html" "Cadastre-se"
+    text-decoration "none"
+active :
+    text-decoration "underline"
+$ "img" :
+    max-width "100px"
+h3 :
+    font-size "30px"
+    font-weight "bold"
+main :
+    padding "20px 60px"
+features :
+    padding "20px 60px"
+cardgrid :
+    display "flex"
+    flex-direction "row"
+    flex-wrap "wrap"
+    justify-content "space-between"
+codebox :
+    background "black"
+    color "#efefef"
+    padding "20px"
+    border-radius "10px"
+    font-family "'Courier New'"
+card :
+    height "auto"
+    width "30%"
+    background "#e8f7fa"
+    border "solid 2px"
+    border-color "#e8f7fa"
+    border-radius "25px"
+    font-size "0.85rem"
+    text-align "start"
+    padding "10px"
+    margin-bottom "20px"
+cardtitle :
+    font-weight "bold"
+    margin-bottom "0.2rem"
+    text-decoration "underline"
+
+body :
+    section (home):
+        section (header):
+            img "logo.png" "logo"
+            section (nav):
+                section (item):
+                    link "https://cyan-lang.org/" "about"
+                section (item):
+                    link "https://compiler.cyan-lang.org" "compiler"
+                section (item):
+                    link "https://cyan-lang.org/docs" "docs"
+                section (item):
+                    link "https://cyan-lang.org/downloads/" "downloads"
+                section (item):
+                    link "https://cyan-lang.org/examples/" "examples"
+        section (main):
+            text (h3) "The Cyan Object-oriented Language"
+            text (p) "Cyan is a statically-typed and prototype-based language for the JVM. The language has several innovations mainly in its Metaobject Protocol that allows tailoring the language to the developer’s goals. It supports all the expected features of modern languages and much more."
+            text (p) "Below is the “Hello world” program. Soon there will be a short Cyan course."
+            section (codebox):
+                text (code) "package main"
+                text (code) "object Program"
+                text (code) "func run {"
+                text (code) "'Hello world' println"
+                text (code) "}"
+                text (code) "end"
+        section (features):
+            text (h3) "Features"
+            section (cardgrid):
+                section (card):
+                    text (cardtitle) "Simplicity is the main goal"
+                    text (small) "No bells and whistles, complex features are implemented using metaobjects, outside the language"
+                section (card):
+                    text (cardtitle) "Simplicity is the main goal"
+                    text (small) "No bells and whistles, complex features are implemented using metaobjects, outside the language"
+                section (card):
+                    text (cardtitle) "Simplicity is the main goal"
+                    text (small) "No bells and whistles, complex features are implemented using metaobjects, outside the language"
+                section (card):
+                    text (cardtitle) "Simplicity is the main goal"
+                    text (small) "No bells and whistles, complex features are implemented using metaobjects, outside the language"
 ```
 
 ### Código
@@ -43,11 +118,7 @@ pip install lark
 ```
 #### Análise Léxica e Sintática
 
-Para gerar a AST você deve rodar o arquivo EwmParser.py com o comando abaixo e um arquivo out.json será gerado contendo algo como o exemplo a seguir
-
-```
-python3 EwmParser.py
-```
+A AST é gerada automaticamente quando rodamos o arquivo EwmParser.py, mas ela tem o formato como o exemplo a seguir
 
 ```
 [
@@ -241,4 +312,21 @@ WrongAttributeError: Parameter colour do not match with attribute button in 17:1
 
 #### Geração de Código
 
+Para a geração de código, alteramos o EwmParser para receber um ARQUIVO de parâmetro, assim gerando um arquivo .html no mesmo diretório rodado.
+
+```
+python3 EwmParser.py home.ewm 
+```
+
+Também fizemos um executável ewm, que permite executar qualquer arquivo ewm e gera um html de saída.
+
+```
+ewm home.ewm 
+```
+
 #### Live Server
+
+É possível acompanhar as mudanças usando o Live Preview no vsCode para uma experiência melhor.
+
+<img width="1680" alt="image" src="https://user-images.githubusercontent.com/44788970/229805703-930e75ea-efc6-4182-a09a-245ff2581cb5.png">
+
