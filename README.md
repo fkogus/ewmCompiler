@@ -408,7 +408,13 @@ Para a geração de código, alteramos o EwmParser para receber um ARQUIVO de pa
 python3 EwmParser.py home.ewm 
 ```
 
-Também fizemos um executável ewm, que permite executar qualquer arquivo ewm e gera um html de saída.
+Também fizemos um executável ewm, que permite executar qualquer arquivo ewm e gera um html de saída, você precisa apenas adicionar o caminho da pasta ewm disponível neste repositório ao seu PATH
+
+```
+export PATH="$PATH:{sua_pasta_ewm}" 
+```
+
+E logo em seguida pode executar qualquer arquivo .ewm desta forma: 
 
 ```
 ewm home.ewm 
